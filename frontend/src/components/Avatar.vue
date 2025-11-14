@@ -1,7 +1,7 @@
 <template>
   <div>
     <img
-      class="avatar-img"
+      class="avatar-container"
       :src="url"
       :style="{
         width: size + 'px',
@@ -27,7 +27,7 @@ const props = defineProps({
 
 <style scoped>
 /*scoped:带有作用域的样式,防止样式冲突 */
-.avatar-img {
+.avatar-container {
   border-radius: 50%;
   object-fit: cover; /*解释: 图片裁剪,保持比例,填充整个容器 */
   display: block; /*行盒：与其他行盒在同一行排列 */
