@@ -27,7 +27,7 @@
 </template>
 
 <style lang="less" scoped>
-@import "../styles/style.less";
+@import "../../styles/style.less";
 .pager-container {
   display: flex;
   justify-content: center;
