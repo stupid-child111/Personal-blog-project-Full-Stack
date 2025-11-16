@@ -25,7 +25,7 @@ import Menu from "./Menu/index.vue";
   overflow: hidden auto;
 }
 
-:deep .avatar-container {
+:deep(.avatar-container) {
   margin: 0 auto;
 }
 
