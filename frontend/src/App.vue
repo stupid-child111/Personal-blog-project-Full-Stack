@@ -1,28 +1,30 @@
 <template>
-  <div>
-    <!-- 你好
-    <Avatar url="https://www.dmoe.cc/random.php" :size="100" />
-    <Icon type="home" />
-    <Pager :total="total" :current="current" @pageChange="handlePageChange" /> -->
-    <Empty />
+  <div class="app-container">
+    <Layout>
+      <template #left>
+        <div class="aside">
+          <SiteAside />
+        </div>
+      </template>
+      <template #default>
+        中间区域
+      </template>
+    </Layout>
   </div>
 </template>
 
 <script setup>
-import Avatar from "./components/Avatar/index.vue";
-import Icon from "./components/Icon/index.vue";
-import Pager from "./components/Pager/index.vue";
-import Empty from "./components/Empty/index.vue";
-import { ref } from "vue";
-const total = ref(302);
-const current = ref(3);
-const handlePageChange = ((page) => {
-  current.value = page;
-})
+import Layout from "./components/Layout/index.vue";
+import SiteAside from "./components/SiteAside/index.vue";
 </script>
 
-<style scoped>
-.iconfont {
-  color: red;
+<style lang="less" scoped>
+@import "./styles/mixin.less";
+.app-container {
+  .self-fill(fixed);
+}
+.aside {
+  width:200px;
+  height: 100%;
 }
 </style>
