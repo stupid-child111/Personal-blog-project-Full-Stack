@@ -1,61 +1,57 @@
 <template>
   <nav class="menu-container">
-    <a
+    <RouterLink
+      :exact="item.exact"
       v-for="item in menuItems"
       :key="item.link"
-      :href="item.link"
-      :class="{
-        selected: isSelected(item),
-      }"
+      :to="{name: item.name}"
+      active-class="selected"
+      exact-active-class=""
     >
       <div class="icon">
         <Icon :type="item.icon" />
       </div>
       <span>{{ item.title }}</span>
-    </a>
+    </RouterLink>
   </nav>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import Icon from "@/components/Icon/index.vue";
+
 const menuItems = ref([
   {
-    link: "/",
+    name: "Home",
     title: "首页",
     icon: "home",
+    exact: true, //精确匹配
   },
   {
-    link: "/blog",
+    name: "Blog",
     title: "文章",
     icon: "blog",
-    startWith: true, //只要当前路径以/blog开头，就认为是选中状态
+    exact: false, //模糊匹配
   },
   {
-    link: "/about",
+    name: "About",
     title: "关于",
     icon: "about",
+    exact: true,
   },
   {
-    link: "/project",
+    name: "Project",
     title: "项目&效果",
     icon: "code",
+    exact: true,
   },
   {
-    link: "/message",
+    name: "Message",
     title: "留言板",
     icon: "chat",
+    exact: true,
   },
 ]);
-const isSelected = (item) => {
-  const link = item.link.toLowerCase();
-  const curPathname = location.pathname.toLowerCase();
-  if (item.startWith) {
-    return curPathname.startsWith(link);
-  } else {
-    return curPathname === link;
-  }
-};
 </script>
 
 <style lang="less" scoped>
@@ -64,6 +60,9 @@ const isSelected = (item) => {
   color: @gray;
   margin: 24px 0;
   a {
+    &.selected {
+      background: #2d2d2d;
+    }
     display: block; //块盒独占一行
     padding: 0 50px;
     display: flex;
@@ -74,9 +73,6 @@ const isSelected = (item) => {
     }
     &:hover {
       color: #fff;
-    }
-    &.selected {
-      background: #2d2d2d;
     }
   }
 }

@@ -161,3 +161,39 @@ computed:{
   </template>
 </Layout>
 ```
+
+### 使用 vue-router
+
+- 1.如何根据地址中的路径选择不同的组件？
+- 3.如何无刷新的切换组件？
+- 2.把选择的组件放到哪个位置？
+
+#### hash 模式
+
+适配浏览器不支持 history 模式的情况
+
+#### history 模式
+
+无刷新的切换组件 需要浏览器支持 history 模式
+
+### 命名路由
+
+- 使用命名路由可以**解除系统与路径之间的耦合**
+
+```javascript
+// 路由配置
+const router = new VueRouter({
+  routes: [
+    // 路由规则
+    // 当匹配到路径 /foo 时，渲染 Foo 组件
+    { name: "foo", path: "/foo", component: Foo },
+    // 当匹配到路径 /bar 时，渲染 Bar 组件
+    { name: "bar", path: "/bar", component: Bar },
+  ],
+});
+```
+
+```html
+<!-- 向to属性传递路由信息对象 RouterLink会根据你传递的信息以及路由配置生成对应的路径 -->
+<RouterLink :to="{ name:'foo' }">go to foo</RouterLink>
+```

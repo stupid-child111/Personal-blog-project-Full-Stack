@@ -35,9 +35,9 @@ footer {
   text-align: center;
 }
 .title {
-    font-size: 1em;
-    color: #fff;
-    text-align: center;
+  font-size: 1em;
+  color: #fff;
+  text-align: center;
 
 }
 </style>
