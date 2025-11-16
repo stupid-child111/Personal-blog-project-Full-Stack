@@ -21,6 +21,7 @@ const props = defineProps({
   //考虑通用性,需要传递的数据
   size: {
     type: Number,
+    default: 150,
   },
 });
 </script>
