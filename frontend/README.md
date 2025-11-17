@@ -248,3 +248,13 @@ console.log(dom); // 输出 Icon 组件渲染后的根 DOM 元素
   |----|----|----|
   |声明 |ref 无需声明,直接在模板中用 ref="xxx"，通过 this.$refs.xxx 访问	|需在 setup 中用 ref(null) 声明变量,模板中绑定 ref="xxx"，通过 xxx.value 访问|
 |子组件访问|	直接通过 this.$refs.xxx 访问子组件实例所有属性方法| 子组件需用 defineExpose 显式暴露属性方法，父组件才能访问|
+
+### 修改消息组件的显示位置错误
+
+- 如果以 document.body(position:relative) 为容器,则默认会显示在页面的上方
+
+解决方法:
+
+- 当用户指定了 container 时，代码会检查该容器的 position 样式。
+- 如果是 static（默认值），它会将其改为 relative。这是一个非常常见且正确的做法，目的是为了让后续使用 position: absolute 定位的消息框能相对于该容器进行居中，而不是相对于整个页面。
+- 当用户未指定 container（即使用 document.body）时，代码不做任何修改，直接 append。

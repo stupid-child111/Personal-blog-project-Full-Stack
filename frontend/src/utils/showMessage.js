@@ -20,14 +20,15 @@ export default function (options = {}) {
   });
   div.innerHTML = `<span class="${styles.icon}">${iconDom.outerHTML}</span><div>${content}</div>`;
   div.className = `${styles.message} ${styles[`message-${type}`]}`;
-  if (!container) {
-    const container = document.body;
-    container.appendChild(div);
-  } else {
-    //容器position是否改变,如果改变,需要将消息显示到容器正中间
+
+  if (options.container) {
     if (getComputedStyle(container).position === "static") {
       container.style.position = "relative";
     }
+    container.appendChild(div);
+  } else {
+    //容器position是否改变,如果改变,需要将消息显示到容器正中间
+
     container.appendChild(div);
   }
   //浏览器强行渲染
