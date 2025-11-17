@@ -7,7 +7,13 @@
 
 <script setup>
 import { showMessage } from "@/utils";
-import { ref } from "vue";
+import { getBannerData } from "../../api/banner";
+import { onMounted, ref } from "vue";
+onMounted(() => {
+  getBannerData().then((res) => {
+    console.log(res);
+  });
+});
 
 const homeContainer = ref(null);
 const handleClick = () => {
@@ -15,9 +21,9 @@ const handleClick = () => {
     content: "hello world",
     type: "success",
     container: homeContainer.value,
-    callback:function(){
+    callback: function () {
       console.log("消息显示完成,可执行后续逻辑");
-    }
+    },
   });
 };
 </script>
