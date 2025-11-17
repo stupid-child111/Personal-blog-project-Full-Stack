@@ -1,9 +1,29 @@
 <template>
-  <div>
+  <div class="home-container" ref="homeContainer">
     <h1>首页</h1>
+    <button @click="handleClick">点击我</button>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { showMessage } from "@/utils";
+import { ref } from "vue";
 
-<style lang="less" scoped></style>
+const homeContainer = ref(null);
+const handleClick = () => {
+  showMessage({
+    content: "hello world",
+    type: "success",
+    container: homeContainer.value,
+    callback:function(){
+      console.log("消息显示完成,可执行后续逻辑");
+    }
+  });
+};
+</script>
+
+<style lang="less" scoped>
+.home-container {
+  background: purple;
+}
+</style>

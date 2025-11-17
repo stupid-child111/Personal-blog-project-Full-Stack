@@ -197,3 +197,54 @@ const router = new VueRouter({
 <!-- 向to属性传递路由信息对象 RouterLink会根据你传递的信息以及路由配置生成对应的路径 -->
 <RouterLink :to="{ name:'foo' }">go to foo</RouterLink>
 ```
+
+## 实现消息通知(弹窗式)
+
+### CSS Module 使用
+
+- 开启 CSS Module 后，组件的样式将被限制在当前组件范围内，不会影响到其他组件
+- 样式命名必须为 **xxx.module.css** 才能获取到(不然获取到的样式就是一个空对象)
+
+```js
+import styles from "./styles/message.module.less";
+console.log(styles);
+const div = document.createElement("div");
+div.className = styles.message;
+div.innerText = "asdfasdf";
+document.body.appendchild(div);
+```
+
+### Vue 组件 → DOM 元素
+
+```js
+import { createApp, h, render } from "vue";
+
+// 工具函数：获取组件的根 DOM 元素
+function getComponentRootDom(comp, props) {
+  // 1. 创建一个空的容器节点（用于挂载组件）
+  const container = document.createElement("div");
+  // 2. 手动创建组件的 VNode（虚拟节点）
+  const vnode = h(comp, props);
+  // 3. 将 VNode 渲染到容器中
+  render(vnode, container);
+  // 4. 返回渲染后的根 DOM 元素
+  return container.firstElementChild;
+}
+// 调用示例（假设 Icon 是 Vue 3 组件）
+import Icon from "./components/Icon.vue";
+const dom = getComponentRootDom(Icon, { type: "home" });
+console.log(dom); // 输出 Icon 组件渲染后的根 DOM 元素
+```
+
+#### 拓展 vue 实例
+
+- 向 vue 实例添加方法 vue.prototype.xxx = function(){}
+
+#### ref 操作 dom 元素
+
+- **通过 ref 可以直接操作 dom 元素，甚至可能直接改动子组件，这些都不符合 vue 的设计理念**。(数据驱动视图 和 组件化的封装与解耦)
+  三、Vue 3 与 Vue 2 的核心区别
+  |场景 |Vue 2 写法| Vue 3 写法（组合式 API）|
+  |----|----|----|
+  |声明 |ref 无需声明,直接在模板中用 ref="xxx"，通过 this.$refs.xxx 访问	|需在 setup 中用 ref(null) 声明变量,模板中绑定 ref="xxx"，通过 xxx.value 访问|
+|子组件访问|	直接通过 this.$refs.xxx 访问子组件实例所有属性方法| 子组件需用 defineExpose 显式暴露属性方法，父组件才能访问|
