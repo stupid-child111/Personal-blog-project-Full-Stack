@@ -1,0 +1,62 @@
+# -------------------------- 核心 Node.js 忽略项 --------------------------
+# 依赖目录（最关键，必须忽略）
+node_modules/
+# npm 缓存文件
+.npm
+# yarn 缓存文件
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+# pnpm 缓存文件
+pnpm-lock.yaml
+.pnpm-store/
+
+# -------------------------- 环境与配置文件 --------------------------
+# 环境变量文件（存放敏感信息：数据库密码、密钥等，绝对不要提交）
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+# 自定义配置文件（如 config/local.js）
+config/local.js
+# IDE 自动生成的配置（如 VS Code）
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# -------------------------- 日志与临时文件 --------------------------
+# 日志文件
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+# 临时文件
+tmp/
+temp/
+# 进程文件
+.pid
+.pid.lock
+
+# -------------------------- 构建与打包文件 --------------------------
+# 打包输出目录（如用 webpack/rollup 打包后端）
+dist/
+build/
+# 压缩包
+*.zip
+*.tar.gz
+*.rar
+
+# -------------------------- 其他通用忽略项 --------------------------
+# OS 自动生成的文件
+.DS_Store       # Mac
+Thumbs.db       # Windows
+# 编辑器备份文件
+*.bak
+*.tmp
+# 覆盖率报告（测试用）
+coverage/
