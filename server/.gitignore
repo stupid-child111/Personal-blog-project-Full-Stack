@@ -60,3 +60,4 @@ Thumbs.db       # Windows
 *.tmp
 # 覆盖率报告（测试用）
 coverage/
+data/mysql/*
