@@ -1,3 +1,4 @@
+const { formatResponse } = require("./response");
 //自定义处理
 
 class ServiceError extends Error {
@@ -11,7 +12,9 @@ class ServiceError extends Error {
   }
 
   //方法
-  toResponseJSON() {}
+  toResponseJSON() {
+    return formatResponse(this.code, this.message, null);
+  }
 }
 
 //文件上传错误

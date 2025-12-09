@@ -5,7 +5,7 @@ const adminModel = require("./model/adminModel"); //数据模型
 const md5 = require("md5");
 
 (async function () {
-  sequelize.sync({ alter: true });//同步数据库 字段改变会发生相应的改变
+  await sequelize.sync({ alert: true });//同步数据库 字段改变会发生相应的改变
 
   //同步之后，有些表需要初始化数据
   //查询表中有没有内容，没有则初始化数据

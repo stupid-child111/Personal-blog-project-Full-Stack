@@ -11,6 +11,5 @@ module.exports.loginDao = async function(loginInfo) {
             loginPwd: loginInfo.loginPwd,
         },
     });
-    console.log("数据库查询结果", admin)
     return admin;
 };
