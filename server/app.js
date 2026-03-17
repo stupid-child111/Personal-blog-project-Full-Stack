@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // 定义不需要token验证的路径
 const publicPaths = [
-  "/admin/login", // 管理员登录接口
+  "/api/admin/login", // 管理员登录接口
   "/", // 首页
   "/favicon.ico", // 浏览器图标请求
 ];
@@ -53,5 +53,5 @@ app.use((req, res, next) => {
 });
 
 app.use("/", indexRouter);
-app.use("/admin", adminRouter);
+app.use("/api/admin", adminRouter);
 module.exports = app;

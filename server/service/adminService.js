@@ -1,7 +1,8 @@
 //admin 模块的业务逻辑
 const md5 = require("md5");
 const jwt = require("jsonwebtoken");
-const { loginDao } = require("../dao/adminDao");
+const { loginDao, updateAdminDao } = require("../dao/adminDao");
+const { ValidationError } = require("../utils/errors");
 module.exports.loginService = async function (loginInfo) {
   loginInfo.loginPwd = md5(loginInfo.loginPwd);
   let data = await loginDao(loginInfo);
@@ -26,4 +27,26 @@ module.exports.loginService = async function (loginInfo) {
   } else {
     throw new Error("登录失败");
   }
+};
+
+module.exports.updateAdminService = async function (accountInfo) {
+  //旧密码查询
+  const adminInfo = await loginDao({
+    loginId: accountInfo.loginId,
+    loginPwd: md5(accountInfo.oldLoginPwd),
+  });
+
+  //查询成功
+  if (adminInfo && adminInfo.dataValues) {
+    const newPwd = md5(accountInfo.loginPwd);
+    const result = await updateAdminDao({
+      name: accountInfo.name,
+      loginId: accountInfo.loginId,
+      loginPwd: accountInfo.loginPwd,
+    });
+    console.log("result>>>>", result);
+  } else {
+    throw new ValidationError("旧密码错误");
+  }
+  //查询失败
 };
